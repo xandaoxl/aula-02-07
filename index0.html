@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+
+    <style>
+        /* Estilos para a tabela e células */
+        td {
+            border: 1px solid black;
+            background-color: rgb(68, 68, 68);
+            color: aliceblue;
+            font-size: 24px; /* Tamanho da fonte dos botões */
+            width: 50px; /* Largura das células */
+            height: 50px; /* Altura das células */
+            text-align: center; /* Alinhamento do texto no centro */
+        }
+
+        body {
+            background-color: rgb(134, 160, 168);
+            display: flex;
+            justify-content: center; /* Centraliza a calculadora na tela */
+            align-items: center; /* Centraliza a calculadora na tela */
+            height: 100vh; /* Altura total da tela */
+            margin: 0; /* Remove margens padrão */
+        }
+
+        table {
+            background-color: black;
+            border-collapse: collapse; /* Colapso das bordas da tabela */
+        }
+
+        h1 {
+            color: aliceblue;
+            text-align: center;
+        }
+
+        /* Estilo especial para o visor da calculadora */
+        .display {
+            background-color: rgb(242, 17, 54);
+            color: black;
+            text-align: right;
+            font-size: 28px;
+            padding: 10px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <h1>Calculadora</h1>
+
+    <!-- Visor da calculadora -->
+    <div class="display" id="display">0</div>
+
+    <!-- Tabela dos botões da calculadora -->
+    <table>
+        <tr>
+            <td onclick="limparDisplay()">C</td>
+            <td onclick="apagarUltimoCaractere()"><</td>
+            <td onclick="adicionarAoDisplay('/')">/</td>
+            <td onclick="adicionarAoDisplay('*')">X</td>
+        </tr>
+        <tr>
+            <td onclick="adicionarAoDisplay('7')">7</td>
+            <td onclick="adicionarAoDisplay('8')">8</td>
+            <td onclick="adicionarAoDisplay('9')">9</td>
+            <td onclick="adicionarAoDisplay('-')">-</td>
+        </tr>
+        <tr>
+            <td onclick="adicionarAoDisplay('4')">4</td>
+            <td onclick="adicionarAoDisplay('5')">5</td>
+            <td onclick="adicionarAoDisplay('6')">6</td>
+            <td onclick="adicionarAoDisplay('+')">+</td>
+        </tr>
+        <tr>
+            <td onclick="adicionarAoDisplay('1')">1</td>
+            <td onclick="adicionarAoDisplay('2')">2</td>
+            <td onclick="adicionarAoDisplay('3')">3</td>
+            <td rowspan="2" onclick="calcularResultado()">=</td>
+        </tr>
+        <tr>
+            <td colspan="2" onclick="adicionarAoDisplay('0')">0</td>
+            <td onclick="adicionarAoDisplay('.')">.</td>
+        </tr>
+    </table>
+
+    <!-- Script para manipulação do display e cálculos -->
+    <script>
+        // Função para limpar o display
+        function limparDisplay() {
+            document.getElementById('display').innerText = '0';
+        }
+
+        // Função para apagar o último caractere do display
+        function apagarUltimoCaractere() {
+            let display = document.getElementById('display').innerText;
+            document.getElementById('display').innerText = display.slice(0, -1);
+        }
+
+        // Função para adicionar caracteres ao display
+        function adicionarAoDisplay(caractere) {
+            let display = document.getElementById('display').innerText;
+            if (display === '0') {
+                document.getElementById('display').innerText = caractere;
+            } else {
+                document.getElementById('display').innerText += caractere;
+            }
+        }
+
+        // Função para calcular o resultado da expressão no display
+        function calcularResultado() {
+            let expressao = document.getElementById('display').innerText;
+            let resultado = eval(expressao); // Usando eval para avaliar a expressão (cuidado com segurança)
+            document.getElementById('display').innerText = resultado;
+        }
+    </script>
+
+</body>
+</html>
